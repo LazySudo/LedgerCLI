@@ -1,10 +1,14 @@
 import os
 import plaid
+from dotenv import load_dotenv
 from plaid.api import plaid_api
 from plaid.model.transactions_get_request import TransactionsGetRequest
 from plaid.model.transactions_get_request_options import TransactionsGetRequestOptions
 import datetime
 from ledger.database import save_transaction
+
+# Ensure env vars are loaded even if this file is run standalone
+load_dotenv()
 
 def get_plaid_client():
     """

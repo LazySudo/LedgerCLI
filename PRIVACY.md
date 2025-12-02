@@ -1,5 +1,5 @@
-#### **`PRIVACY.md`**
-*Updated to disclose AI usage (resolving the contradiction).*
+**`PRIVACY.md`**
+*(Fixed the contradiction regarding external servers)*
 ```markdown
 # Privacy Policy for LedgerCLI
 

@@ -34,3 +34,21 @@ PLAID_SECRET="your_plaid_secret"
 PLAID_ENV="development"
 # Optional: Leave blank to disable AI features
 GEMINI_API_KEY="your_google_ai_key"
+```
+## Usage
+
+1. Setup Connections
+```bash
+python main.py link
+```
+
+2. Sync Transactions
+```bash
+python main.py sync
+```
+
+3. Generate AI Report:
+```bash
+python main.py analyze
+```
+
