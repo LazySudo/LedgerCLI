@@ -1,35 +1,36 @@
 # LedgerCLI: Personal Finance Dashboard
 
-LedgerCLI is a local-first, command-line interface tool designed for personal financial management (PFM). It aggregates transaction data from connected financial institutions to provide users with a consolidated view of their cash flow.
+LedgerCLI is a local-first, command-line interface tool designed for personal financial management (PFM). It aggregates transaction data from connected financial institutions and optionally uses AI to provide categorized insights.
 
 **Note:** This project is currently in active development.
 
 ## 🚀 Features
+
 * **Unified Account View:** Aggregates balances from checking, savings, and credit card accounts.
-* **Privacy-First Architecture:** Financial data is stored locally in SQLite. External transmission is limited strictly to Plaid (for fetching data) and optionally Google Gemini (for categorization).
-* **Smart Categorization (Optional):** Users can bring their own Google AI Key to intelligently categorize transactions.
-* **Read-Only Access:** The application requests strictly read-only permissions (Transactions & Balance). It cannot move funds.
+* **Smart Categorization (Optional):** Users can provide a Google Gemini API Key to intelligently categorize uncategorized transactions.
+* **Privacy-First Architecture:** Financial data is stored locally in SQLite. External transmission is limited strictly to Plaid (for fetching data) and Google Gemini (if AI is enabled).
+* **Read-Only Access:** The application requests strictly read-only permissions from Plaid. It cannot move funds.
+
+## 🛠 Tech Stack
+
+* **Language:** Python 3.10+
+* **Database:** SQLite3
+* **Bank API:** Plaid
+* **AI Engine:** Google Gemini (Generative AI)
 
 ## 📦 Installation
-1. `git clone https://github.com/yourusername/LedgerCLI.git`
-2. `pip install -r requirements.txt`
-3. Configure `.env` with your Plaid credentials.
 
-## 📄 License
-MIT License.
-"""
+1.  Clone the repository.
+2.  `pip install -r requirements.txt`
+3.  Configure `.env` with your credentials.
 
-PRIVACY_CONTENT = """
-# Privacy Policy for LedgerCLI
+## ⚙️ Configuration
 
-**Effective Date:** December 1, 2025
+Copy `.env.example` to `.env`:
 
-## 1. Data Collection
-LedgerCLI collects financial transaction data specifically for personal budgeting.
-
-## 2. Data Storage
-All data is stored locally (`db.sqlite3`). **No data is transmitted to external servers.**
-
-## 3. Third-Party Access
-LedgerCLI does not share user data. Connection to financial institutions is handled directly via Plaid.
-"""
+```ini
+PLAID_CLIENT_ID="your_plaid_id"
+PLAID_SECRET="your_plaid_secret"
+PLAID_ENV="development"
+# Optional: Leave blank to disable AI features
+GEMINI_API_KEY="your_google_ai_key"

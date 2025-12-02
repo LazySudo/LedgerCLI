@@ -1,3 +1,6 @@
+#### **`PRIVACY.md`**
+*Updated to disclose AI usage (resolving the contradiction).*
+```markdown
 # Privacy Policy for LedgerCLI
 
 **Effective Date:** December 1, 2025
@@ -7,7 +10,7 @@ LedgerCLI is a self-hosted, personal finance tool. It collects financial transac
 
 ## 2. Data Storage
 * **Primary Storage:** All financial data retrieved via the Plaid API is stored locally on the user's machine in a secured SQLite database (`db.sqlite3`).
-* **External Transmission:** Generally, no data is transmitted to external servers, cloud storage, or third-party analytics platforms, with the single exception of the AI Categorization feature described below.
+* **External Transmission:** Generally, no data is transmitted to external servers, cloud storage, or third-party analytics platforms, with the single exception of the optional AI feature described below.
 
 ## 3. Data Usage
 Data is used solely for the following local operations:
@@ -17,9 +20,9 @@ Data is used solely for the following local operations:
 
 ## 4. AI & Third-Party Processors
 **Google Gemini (Generative AI):**
-If the user enables AI features, specific transaction descriptions and amounts (stripped of personally identifiable information like names or account numbers) are sent to Google's Gemini API for the sole purpose of categorization and spending analysis.
+If the user enables AI features (by providing their own API Key), specific transaction descriptions and amounts are sent to Google's Gemini API for the sole purpose of categorization and spending analysis.
 * Data sent to the AI model is **ephemeral** (stateless) and is not used to train Google's models.
-* Users may opt out of this feature by not configuring the `GEMINI_API_KEY`.
+* Users may opt out of this feature entirely by leaving the `GEMINI_API_KEY` blank.
 
 ## 5. Plaid Integration
 Connection to financial institutions is handled directly between the local client and Plaid. LedgerCLI does not see, store, or transmit your online banking credentials. Access is managed via secure OAuth tokens.
