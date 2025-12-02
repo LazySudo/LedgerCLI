@@ -6,6 +6,11 @@ from plaid.model.transactions_get_request import TransactionsGetRequest
 from plaid.model.transactions_get_request_options import TransactionsGetRequestOptions
 import datetime
 from ledger.database import save_transaction
+# Import the AI module safely
+try:
+    from ledger.gemini import categorize_transaction
+except ImportError:
+    categorize_transaction = None
 
 # Ensure env vars are loaded even if this file is run standalone
 load_dotenv()
@@ -35,7 +40,6 @@ def sync_account():
     """
     Connect to Plaid and download transactions.
     """
-    # In a full CLI flow, this token comes from the Link exchange (see 'link' command)
     access_token = os.getenv('PLAID_ACCESS_TOKEN')
     
     if not access_token:
@@ -60,19 +64,33 @@ def sync_account():
             )
         )
 
+        print("🔄 Fetching transactions from Plaid...")
         response = client.transactions_get(request)
         transactions = response['transactions']
         
-        print(f"✅ Retrieved {len(transactions)} transactions from Plaid.")
+        print(f"✅ Retrieved {len(transactions)} transactions.")
         
+        # Check if AI is enabled
+        use_ai = os.getenv("GEMINI_API_KEY") and categorize_transaction
+        if use_ai:
+            print("🧠 AI Auto-Categorization Enabled.")
+
         for txn in transactions:
+            category = txn['category']
+            
+            # If AI is enabled, try to refine the category
+            if use_ai:
+                ai_cat = categorize_transaction(txn['name'], txn['amount'])
+                if ai_cat and ai_cat != "Uncategorized":
+                    category = [ai_cat] # Override Plaid category with AI's specific tag
+
             txn_data = {
                 'transaction_id': txn['transaction_id'],
                 'account_id': txn['account_id'],
                 'amount': txn['amount'],
                 'date': str(txn['date']),
                 'name': txn['name'],
-                'category': txn['category']
+                'category': category
             }
             save_transaction(txn_data)
             
