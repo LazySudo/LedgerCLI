@@ -59,5 +59,15 @@ def analyze():
     click.echo(advice)
     click.echo("----------------------------")
 
+@cli.command()
+def link():
+    """(Setup) Generate a Link Token to connect a bank."""
+    click.echo("--- Bank Connection Setup ---")
+    click.echo("1. LedgerCLI will generate a 'Link Token' via the Plaid API.")
+    click.echo("2. You will open the provided URL in your browser to authenticate with your bank.")
+    click.echo("3. Copy the 'Public Token' from the browser back to this terminal.")
+    click.echo("4. LedgerCLI will exchange it for a permanent 'Access Token' stored locally.")
+    click.echo("\n(To implement this flow, refer to the Plaid Quickstart documentation)")
+
 if __name__ == '__main__':
     cli()

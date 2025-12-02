@@ -5,9 +5,10 @@ LedgerCLI is a local-first, command-line interface tool designed for personal fi
 **Note:** This project is currently in active development.
 
 ## 🚀 Features
-* **Unified Account View:** Aggregates balances from connected accounts.
-* **Privacy-First:** All financial data is retrieved for **local display only**.
-* **Read-Only Access:** The application requests strictly read-only permissions.
+* **Unified Account View:** Aggregates balances from checking, savings, and credit card accounts.
+* **Privacy-First Architecture:** Financial data is stored locally in SQLite. External transmission is limited strictly to Plaid (for fetching data) and optionally Google Gemini (for categorization).
+* **Smart Categorization (Optional):** Users can bring their own Google AI Key to intelligently categorize transactions.
+* **Read-Only Access:** The application requests strictly read-only permissions (Transactions & Balance). It cannot move funds.
 
 ## 📦 Installation
 1. `git clone https://github.com/yourusername/LedgerCLI.git`
